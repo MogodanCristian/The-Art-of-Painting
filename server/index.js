@@ -10,8 +10,6 @@ const authRoute = require('./routes/auth')
 
 dotenv.config();
 
-console.log(process.env.DB_CONNECTION)
-
 //connect to DB
 mongoose.set('strictQuery', false);
 mongoose
@@ -27,8 +25,9 @@ mongoose
   });
 
 //Middlewares
-app.use(bodyparser.json());
 app.use(cors())
+app.use(bodyparser.json());
+
 
 app.use('/api/auth', authRoute)
 
