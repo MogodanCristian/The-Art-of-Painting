@@ -4,15 +4,12 @@ import { jwtDecode } from 'jwt-decode' // Corrected import
 
 export const login = createAsyncThunk('/auth/login', async (credentials, thunkAPI) => {
   try {
-    console.log(credentials)
     const res = await axios.post('http://localhost:3000/api/auth/login', {
       username: credentials.username,
       password: credentials.password,
     });
-    console.log(res.data)
     const token = res.data;
     const user = jwtDecode(token);
-    console.log(user)
     return {
       token,
       user,
@@ -31,6 +28,13 @@ const authSlice = createSlice({
     status: 'idle',
   },
   reducers: {
+    loginSuccess: (state, action) =>{
+      state.isFetching = false;
+      state.currentUser = action.payload.user;
+      state.token = action.payload.token;
+      state.error = false;
+      localStorage.setItem("USER_DATA", JSON.stringify(action.payload));
+  },
     logout: (state) => {
       state.currentUser = null;
       state.token = null;

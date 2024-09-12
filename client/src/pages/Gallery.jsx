@@ -1,17 +1,59 @@
-import React from 'react'
-import ArtCard from '../components/ArtCard'
+import React, { useEffect, useState } from 'react';
+import ArtCard from '../components/ArtCard';
+import GalleryDrawer from '../components/GalleryDrawer';
+import { CircularProgress, Fade } from '@mui/material'; // Import the required Material-UI components
 
 const Gallery = () => {
+  const [artPieces, setArtPieces] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
+
+  useEffect(() => {
+    // Fetch data from the JSON file
+    fetch('/paintings.json')
+      .then(response => response.json())
+      .then(data => {
+        setArtPieces(data);
+        setLoading(false); // Turn off loading after the data is fetched
+      })
+      .catch(error => {
+        console.error('Error fetching art pieces:', error);
+        setLoading(false); // Turn off loading in case of error
+      });
+  }, []);
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <ArtCard
-        image="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/800px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg" // Replace with the actual image URL
-        artist="John Doe"
-        year="2024"
-        value="$5,000"
-      />
-  </div>
-  )
+    <>
+      <GalleryDrawer />
+      {/* Display loading spinner if still loading */}
+      {loading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+          <CircularProgress />
+        </div>
+      ) : (
+        <Fade in={!loading} timeout={1000}>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
+            padding: '20px'
+          }}>
+            {artPieces.map((piece, index) => (
+              <div key={index} style={{ margin: '15px' }}>
+                <ArtCard
+                  image={piece.image}
+                  artist={piece.artist}
+                  year={piece.year}
+                  value={piece.value}
+                />
+              </div>
+            ))}
+          </div>
+        </Fade>
+      )}
+    </>
+  );
 }
 
-export default Gallery
+export default Gallery;
