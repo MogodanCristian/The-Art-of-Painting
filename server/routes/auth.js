@@ -31,7 +31,19 @@ router.post('/login', async(req,res) =>{
             role: user.role,
             username: user.username,
             }, process.env.SECRET_TOKEN,);
-        res.header('auth-token', token).send(token).status(200);
+        // res.header('auth-token', token).send(token).status(200);
+        res.send(
+            {
+                USER_DATA: {
+                    token: token,
+                    user:{
+                        _id: user._id,
+                        role: user.role,
+                        username: user.username,
+                    }
+        }
+    }
+    )
 
     } catch (error) {
         res.status(400).send(error);

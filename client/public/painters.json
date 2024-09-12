@@ -1,0 +1,80 @@
+[
+    {
+      "id": 1,
+      "profile_picture": "https://img.buzzfeed.com/buzzfeed-static/static/2013-11/enhanced/webdr05/7/13/enhanced-buzz-16875-1383848099-5.jpg?downsize=800:*&output-format=auto&output-quality=auto",
+      "name": "John Doe",
+      "crime": "Hitman",
+      "price_for_service": 50000
+    },
+    {
+      "id": 2,
+      "profile_picture": "",
+      "name": "Jane Smith",
+      "crime": "Kidnapper",
+      "price_for_service": 40000
+    },
+    {
+      "id": 3,
+      "profile_picture": "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/bill-gates-mug-shot-vertical-color-tony-rubino.jpg",
+      "name": "Max Johnson",
+      "crime": "Hacker",
+      "price_for_service": 60000
+    },
+    {
+      "id": 4,
+      "profile_picture": "https://img.buzzfeed.com/buzzfeed-static/static/2013-11/enhanced/webdr05/7/13/enhanced-buzz-16260-1383847961-8.jpg?downsize=800:*&output-format=auto&output-quality=auto",
+      "name": "Carlos Mendoza",
+      "crime": "Hitman",
+      "price_for_service": 55000
+    },
+    {
+      "id": 5,
+      "profile_picture": "",
+      "name": "Linda Black",
+      "crime": "Kidnapper",
+      "price_for_service": 45000
+    },
+    {
+      "id": 6,
+      "profile_picture": "",
+      "name": "Tom Hardy",
+      "crime": "Forger",
+      "price_for_service": 35000
+    },
+    {
+      "id": 7,
+      "profile_picture": "",
+      "name": "Diana Green",
+      "crime": "Smuggler",
+      "price_for_service": 48000
+    },
+    {
+      "id": 8,
+      "profile_picture": "",
+      "name": "Frank Abagnale",
+      "crime": "Con Artist",
+      "price_for_service": 53000
+    },
+    {
+      "id": 9,
+      "profile_picture": "",
+      "name": "Ethan Burns",
+      "crime": "Arsonist",
+      "price_for_service": 30000
+    },
+    {
+      "id": 10,
+      "profile_picture": "",
+      "name": "Rebecca Night",
+      "crime": "Thief",
+      "price_for_service": 29000
+    },
+    {
+      "id": 11,
+      "profile_picture": "",
+      "name": "Sam Wilde",
+      "crime": "Fraudster",
+      "price_for_service": 37000
+    }
+  ]
+  

@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import ArtCard from '../components/ArtCard';
-import { CircularProgress, Fade } from '@mui/material'; // Import the required Material-UI components
+import PainterCard from '../components/PainterCard'; // Import the PainterCard component
+import { CircularProgress, Fade } from '@mui/material'; // Import Material-UI components
 import OptionsDrawer from '../components/OptionsDrawer';
 
-
-const Gallery = () => {
-  const [artPieces, setArtPieces] = useState([]);
+const Painters = () => {
+  const [painters, setPainters] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     // Fetch data from the JSON file
-    fetch('/paintings.json')
+    fetch('/painters.json')
       .then(response => response.json())
       .then(data => {
-        setArtPieces(data);
+        setPainters(data);
         setLoading(false); // Turn off loading after the data is fetched
       })
       .catch(error => {
-        console.error('Error fetching art pieces:', error);
+        console.error('Error fetching painters:', error);
         setLoading(false); // Turn off loading in case of error
       });
   }, []);
 
   return (
     <>
-      <OptionsDrawer/>
+        <OptionsDrawer/>
       {/* Display loading spinner if still loading */}
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
@@ -40,15 +39,14 @@ const Gallery = () => {
             minHeight: '100vh',
             padding: '20px'
           }}>
-            {artPieces.map((piece, index) => (
-              <div key={index} style={{ margin: '15px' }}>
-                <ArtCard
-                  image={piece.image}
-                  artist={piece.artist}
-                  year={piece.year}
-                  value={piece.value}
-                />
-              </div>
+            {painters.map((painter) => (
+              <PainterCard
+                key={painter.id}
+                profilePicture={painter.profile_picture}
+                name={painter.name}
+                crime={painter.crime}
+                priceForService={painter.price_for_service}
+              />
             ))}
           </div>
         </Fade>
@@ -57,4 +55,4 @@ const Gallery = () => {
   );
 }
 
-export default Gallery;
+export default Painters;

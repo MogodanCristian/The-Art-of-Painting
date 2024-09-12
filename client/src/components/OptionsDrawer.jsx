@@ -18,12 +18,15 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'; // 
 
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/authSlice';
+import { useLocation, useNavigate } from 'react-router-dom'
 
-export default function GalleryDrawer() {
+export default function OptionsDrawer() {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
-
+  const location = useLocation();
+  console.log(location.pathname)
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
@@ -63,18 +66,20 @@ export default function GalleryDrawer() {
         ))}
       </List>
 
-      {/* Conditionally render admin button */}
       {user?.role === 'admin' && (
         <>
+
           <Divider />
           <List>
             <ListItem disablePadding sx={{ marginBottom: '8px', paddingLeft: '10px' }}>
-              <ListItemButton>
+              <ListItemButton onClick={() =>{
+                  location.pathname === "/gallery" ? navigate('/painters') : navigate('/gallery')
+              }}>
                 <ListItemIcon sx={{ minWidth: '36px' }}>
                   <AdminPanelSettingsIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="To House Painters"
+                  primary={location.pathname === "/gallery" ? "To House Painters" : "To Gallery"}
                   primaryTypographyProps={{ fontSize: '14px' }}
                 />
               </ListItemButton>
