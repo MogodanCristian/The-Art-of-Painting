@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {IconButton, Grid, Paper, Avatar, TextField, Button, InputAdornment} from '@mui/material'
+import {IconButton, Grid, Paper, Avatar, TextField, Button, InputAdornment, Alert} from '@mui/material'
 import logo from '../images/logo.png'
 import { login } from '../redux/authSlice'
 
@@ -43,7 +43,9 @@ const Login = () => {
         try {
             await dispatch(login(credentials)).unwrap()
         } catch (error) {
-            
+            console.log(error.message)
+            setShowError(true)
+            setErrorMessage(error.message)
         }
     }
     const handleKeyPress = (e) => {
@@ -80,7 +82,7 @@ const Login = () => {
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth onClick={handleSubmit}>
                     Sign in
                 </Button>
-                {showError && <Alert style={{marginTop: '15px'}} severity="error">{errorMessage}</Alert>}
+                {/* {showError && <Alert style={{marginTop: '15px'}} severity="error">{errorMessage}</Alert>} */}
             </Paper>
         </Grid>
     )

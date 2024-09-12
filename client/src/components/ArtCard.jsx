@@ -9,6 +9,7 @@ const ArtCard = ({ image, artist, year, value }) => {
         height="200"
         image={image}
         alt="Art piece"
+        width="200"
       />
       <CardContent>
         <Typography variant="h6" component="div" gutterBottom>
