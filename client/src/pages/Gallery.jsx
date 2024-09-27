@@ -2,24 +2,16 @@ import React, { useEffect, useState } from 'react';
 import ArtCard from '../components/ArtCard';
 import { CircularProgress, Fade } from '@mui/material'; // Import the required Material-UI components
 import OptionsDrawer from '../components/OptionsDrawer';
-
+import { paintings } from '../../public/paintings'; // Import paintings from the paintings.js file
 
 const Gallery = () => {
   const [artPieces, setArtPieces] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    // Fetch data from the JSON file
-    fetch('/paintings.json')
-      .then(response => response.json())
-      .then(data => {
-        setArtPieces(data);
-        setLoading(false); // Turn off loading after the data is fetched
-      })
-      .catch(error => {
-        console.error('Error fetching art pieces:', error);
-        setLoading(false); // Turn off loading in case of error
-      });
+    // Directly use the imported paintings data instead of fetching
+    setArtPieces(paintings);
+    setLoading(false); // Turn off loading as we have the data already
   }, []);
 
   return (

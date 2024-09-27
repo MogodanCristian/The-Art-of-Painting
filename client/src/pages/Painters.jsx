@@ -2,28 +2,21 @@ import React, { useEffect, useState } from 'react';
 import PainterCard from '../components/PainterCard'; // Import the PainterCard component
 import { CircularProgress, Fade } from '@mui/material'; // Import Material-UI components
 import OptionsDrawer from '../components/OptionsDrawer';
+import { paintersData} from '../../public/painters'; // Import painters from painters.js file
 
 const Painters = () => {
   const [painters, setPainters] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    // Fetch data from the JSON file
-    fetch('/painters.json')
-      .then(response => response.json())
-      .then(data => {
-        setPainters(data);
-        setLoading(false); // Turn off loading after the data is fetched
-      })
-      .catch(error => {
-        console.error('Error fetching painters:', error);
-        setLoading(false); // Turn off loading in case of error
-      });
+    // Directly use the imported painters data
+    setPainters(paintersData);
+    setLoading(false); // Turn off loading as we have the data already
   }, []);
 
   return (
     <>
-        <OptionsDrawer/>
+      <OptionsDrawer />
       {/* Display loading spinner if still loading */}
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>

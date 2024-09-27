@@ -13,6 +13,7 @@ import Unauthorized from './pages/Unauthorized'
 import { jwtDecode } from 'jwt-decode'
 import { loginSuccess } from './redux/authSlice'
 import Painters from './pages/Painters'
+import Painter from './pages/Painter'
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -34,6 +35,7 @@ function App() {
           <Route path='/' element={user ? <Gallery /> : <Navigate to={'/login'} />} />
           <Route path='/unauthorized' element={<Unauthorized/>}/>
           <Route path='/painters' element={<Painters/>}/>
+          <Route path='/painters/:id' element={<Painter />}/>
         </Routes>
       </>
     </Router>
