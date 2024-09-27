@@ -2,21 +2,24 @@ import React, { useEffect, useState } from 'react';
 import ArtCard from '../components/ArtCard';
 import { CircularProgress, Fade } from '@mui/material'; // Import the required Material-UI components
 import OptionsDrawer from '../components/OptionsDrawer';
-import { paintings } from '../../public/paintings'; // Import paintings from the paintings.js file
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPaintings } from '../redux/paintingsSlice';
 
 const Gallery = () => {
-  const [artPieces, setArtPieces] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const dispatch = useDispatch();
+  
+  // Use useSelector to get paintings from the Redux store
+  const artPieces = useSelector((state) => state.paintings.list);
+  const loading = useSelector((state) => state.paintings.status === 'loading'); // Get loading status from Redux
 
+  // Fetch paintings when the component mounts
   useEffect(() => {
-    // Directly use the imported paintings data instead of fetching
-    setArtPieces(paintings);
-    setLoading(false); // Turn off loading as we have the data already
-  }, []);
+    dispatch(getAllPaintings()); // Call the thunk to fetch paintings
+  }, [dispatch]);
 
   return (
     <>
-      <OptionsDrawer/>
+      <OptionsDrawer />
       {/* Display loading spinner if still loading */}
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
@@ -33,7 +36,7 @@ const Gallery = () => {
             padding: '20px'
           }}>
             {artPieces.map((piece, index) => (
-              <div key={index} style={{ margin: '15px' }}>
+              <div key={piece.id} style={{ margin: '15px' }}> {/* Use piece.id for unique key */}
                 <ArtCard
                   image={piece.image}
                   artist={piece.artist}

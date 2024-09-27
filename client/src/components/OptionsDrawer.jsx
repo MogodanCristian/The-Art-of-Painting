@@ -27,6 +27,7 @@ export default function OptionsDrawer() {
   const user = useSelector((state) => state.user.currentUser);
   const location = useLocation();
   console.log(location.pathname)
+  
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
@@ -51,7 +52,9 @@ export default function OptionsDrawer() {
               paddingLeft: '10px',
             }}
           >
-            <ListItemButton>
+            <ListItemButton onClick={() =>{
+               navigate('/create-painting')
+            }}>
               <ListItemIcon sx={{ minWidth: '36px' }}>
                 {text === 'Create Gallery Entry' && <AddCircleOutlineIcon />}
                 {text === 'Edit Gallery Entry' && <EditIcon />}
