@@ -18,16 +18,16 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'; // 
 
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/authSlice';
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function OptionsDrawer() {
   const [open, setOpen] = React.useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
   const location = useLocation();
-  console.log(location.pathname)
-  
+  console.log(location.pathname);
+
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
@@ -52,8 +52,10 @@ export default function OptionsDrawer() {
               paddingLeft: '10px',
             }}
           >
-            <ListItemButton onClick={() =>{
-               navigate('/create-painting')
+            <ListItemButton onClick={() => {
+              text === 'Create Gallery Entry' && navigate('/create-painting');
+              text === 'Edit Gallery Entry' && navigate('/edit-painting');
+              text === 'Delete Gallery Entry' && navigate('/delete-painting');
             }}>
               <ListItemIcon sx={{ minWidth: '36px' }}>
                 {text === 'Create Gallery Entry' && <AddCircleOutlineIcon />}
@@ -69,34 +71,53 @@ export default function OptionsDrawer() {
         ))}
       </List>
 
-      {user?.role === 'admin' && (
-        <>
+      {/* Conditional rendering based on user role */}
+      <Divider />
 
-          <Divider />
-          <List>
-            <ListItem disablePadding sx={{ marginBottom: '8px', paddingLeft: '10px' }}>
-              <ListItemButton onClick={() =>{
-                  location.pathname === "/gallery" ? navigate('/painters') : navigate('/gallery')
-              }}>
-                <ListItemIcon sx={{ minWidth: '36px' }}>
-                  <AdminPanelSettingsIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary={location.pathname === "/gallery" ? "To House Painters" : "To Gallery"}
-                  primaryTypographyProps={{ fontSize: '14px' }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </>
-      )}
+      {/* Show "To Gallery" option for both admin and viewer */}
+      <List>
+        <ListItem disablePadding sx={{ marginBottom: '8px', paddingLeft: '10px' }}>
+          <ListItemButton onClick={() => {
+            if (location.pathname !== '/gallery') {
+              navigate('/gallery');
+            }
+          }}>
+            <ListItemIcon sx={{ minWidth: '36px' }}>
+              <AdminPanelSettingsIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="To Gallery"
+              primaryTypographyProps={{ fontSize: '14px' }}
+            />
+          </ListItemButton>
+        </ListItem>
+
+        {/* Show "To House Painters" only for admin */}
+        {user?.role === 'admin' && (
+          <ListItem disablePadding sx={{ marginBottom: '8px', paddingLeft: '10px' }}>
+            <ListItemButton onClick={() => {
+              if (location.pathname !== '/painters') {
+                navigate('/painters');
+              }
+            }}>
+              <ListItemIcon sx={{ minWidth: '36px' }}>
+                <AdminPanelSettingsIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="To House Painters"
+                primaryTypographyProps={{ fontSize: '14px' }}
+              />
+            </ListItemButton>
+          </ListItem>
+        )}
+      </List>
 
       <Divider />
       <List>
         <ListItem disablePadding sx={{ marginTop: '10px', paddingLeft: '10px' }}>
           <ListItemButton onClick={() => {
-            if(user){
-                dispatch(logout())
+            if (user) {
+              dispatch(logout());
             }
           }}>
             <ListItemIcon sx={{ minWidth: '36px' }}>
@@ -104,7 +125,7 @@ export default function OptionsDrawer() {
             </ListItemIcon>
             <ListItemText
               primary="Logout"
-              primaryTypographyProps={{ fontSize: '14px' }} 
+              primaryTypographyProps={{ fontSize: '14px' }}
             />
           </ListItemButton>
         </ListItem>

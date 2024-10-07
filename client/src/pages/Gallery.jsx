@@ -36,7 +36,7 @@ const Gallery = () => {
             padding: '20px'
           }}>
             {artPieces.map((piece, index) => (
-              <div key={piece.id} style={{ margin: '15px' }}> {/* Use piece.id for unique key */}
+              <div key={piece._id} style={{ margin: '15px' }}> {/* Use piece.id for unique key */}
                 <ArtCard
                   image={piece.image}
                   artist={piece.artist}

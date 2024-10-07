@@ -15,6 +15,8 @@ import { loginSuccess } from './redux/authSlice'
 import Painters from './pages/Painters'
 import Painter from './pages/Painter'
 import CreatePainting from './pages/CreatePainting'
+import EditPainting from './pages/EditPainting'
+import DeletePainting from './pages/DeletePainting'
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -38,6 +40,8 @@ function App() {
           <Route path='/painters' element={user ? <Painters/> : <Unauthorized/>}/>
           <Route path='/painters/:id' element={user ? <Painter/> : <Unauthorized/>}/>
           <Route path='/create-painting' element={user ? <CreatePainting/> : <Unauthorized/>}/>
+          <Route path='/edit-painting' element={user ? <EditPainting/> : <Unauthorized/>}/>
+          <Route path='/delete-painting' element={user ? <DeletePainting/> : <Unauthorized/>}/>
         </Routes>
       </>
     </Router>

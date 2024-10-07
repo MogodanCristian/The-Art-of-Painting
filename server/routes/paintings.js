@@ -54,19 +54,31 @@ router.delete('/:paintingID', async(req, res) =>{
     }
 })
 
-router.put('/:paintingID', async(req, res) =>{
+router.put('/:paintingID', async (req, res) => {
     try {
-        const updated = await Painting.findByIdAndUpdate(
-            {
-                _id: req.params.paintingID
-            },
-            {
-                $set: req.body
-            });
-        res.json(updated._id);
+      // Fetch all paintings
+      const paintings = await Painting.find();
+  
+      // Find the painting by ID
+      const paintingIndex = paintings.findIndex(painting => painting._id.toString() === req.params.paintingID);
+  
+      if (paintingIndex === -1) {
+        return res.status(404).json({ message: 'Painting not found' });
+      }
+      // Update the painting entry with new data from req.body
+      const updatedPainting = { ...paintings[paintingIndex]._doc, ...req.body };
+  
+      // Replace the old painting in the array
+      paintings[paintingIndex] = updatedPainting;
+  
+      // Optionally save the updated paintings array to the database
+      await Painting.updateOne({ _id: req.params.paintingID }, updatedPainting);
+  
+      // Return the modified array
+      res.json(paintings);
     } catch (error) {
-        res.status(400).send(error)
-        console.log(error)
+      res.status(400).send(error);
+      console.log(error);
     }
-})
+  });
 module.exports = router
