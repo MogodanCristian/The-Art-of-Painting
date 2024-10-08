@@ -18,6 +18,7 @@ import EditPainting from './pages/EditPainting';
 import DeletePainting from './pages/DeletePainting';
 import { loginSuccess } from './redux/authSlice';
 import { getAllPaintings } from './redux/paintingsSlice';
+import Robots from './pages/Robots';
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -69,6 +70,7 @@ function App() {
           <Route path='/create-painting' element={user ? <CreatePainting /> : <Unauthorized />} />
           <Route path='/edit-painting' element={user ? <EditPainting /> : <Unauthorized />} />
           <Route path='/delete-painting' element={user ? <DeletePainting /> : <Unauthorized />} />
+          <Route path='/robots.txt' element={<Robots/>}/>
         </Routes>
       </Router>
     </>
