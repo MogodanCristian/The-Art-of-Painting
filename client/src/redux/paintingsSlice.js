@@ -41,7 +41,6 @@ export const editPainting = createAsyncThunk(
   async({id, data}, thunkAPI) =>{
     try {
       const res = await axios.put(`${BASE_URL}/paintings/${id}`, data)
-      console.log(res)
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({error:error.message})
@@ -114,8 +113,9 @@ const paintingsSlice = createSlice({
       .addCase(deletePainting.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(deletePainting.fulfilled, (state) => {
+      .addCase(deletePainting.fulfilled, (state, action) => {
         state.status = 'successful';
+        state.list = action.payload
       })
       .addCase(deletePainting.rejected, (state, action) => {
         state.status = 'failed';

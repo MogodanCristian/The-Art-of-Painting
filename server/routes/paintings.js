@@ -38,21 +38,40 @@ router.get('/get-painting/:paintingID', async(req, res) =>{
     }
 })
 
-router.delete('/:paintingID', async(req, res) =>{
+router.delete('/:paintingID', async (req, res) => {
     try {
-        const painting = await Painting.findById(req.params.paintingID)
-        if(!painting){
-            res.status(404).json("Painting not found!")
-        }
-        await Painting.deleteOne({
-            _id: req.params.paintingID
-        })
-        res.json(painting._id).status(200)
+      // Fetch all paintings from the database
+      let paintings = await Painting.find();
+  
+      // Find the index of the painting to delete
+      const paintingIndex = paintings.findIndex(
+        (painting) => painting._id == req.params.paintingID
+      );
+  
+      // If the painting is not found in the array, return a 404 error
+      if (paintingIndex === -1) {
+        return res.status(404).json("Painting does not exist!");
+      }
+  
+      // Remove the painting from the array
+      const deletedPaintingFromArray = paintings.splice(paintingIndex, 1); // Removes the painting from array
+  
+      // Remove the painting from the database
+      const deletedPaintingFromDB = await Painting.findByIdAndDelete(req.params.paintingID);
+  
+      if (!deletedPaintingFromDB) {
+        // If no painting was deleted from the database (as a safeguard), return an error
+        return res.status(404).json("Painting not found in the database!");
+      }
+  
+      // Send a success response with the modified array and deleted painting details
+      res.status(200).json(paintings);
     } catch (error) {
-        res.status(400).send(error)
-        console.log(error)
+      // Handle any errors that occur
+      res.status(400).json({ error: error.message });
+      console.log(error);
     }
-})
+  });
 
 router.put('/:paintingID', async (req, res) => {
     try {
