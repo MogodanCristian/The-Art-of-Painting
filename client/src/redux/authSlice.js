@@ -8,7 +8,7 @@ export const login = createAsyncThunk('/auth/login', async (credentials, thunkAP
       username: credentials.username,
       password: credentials.password,
     });
-    const token = res.data;
+    const token = res.data.USER_DATA.token;
     const user = jwtDecode(token);
     return {
       token,

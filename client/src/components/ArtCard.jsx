@@ -13,7 +13,7 @@ const ArtCard = ({ image, artist, year, value }) => {
       />
       <CardContent>
         <Typography variant="h6" component="div" gutterBottom>
-          {artist}
+          Artist: {artist}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Year Published: {year}

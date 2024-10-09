@@ -7,6 +7,7 @@ const cors = require('cors')
 
 //import routes
 const authRoute = require('./routes/auth')
+const paintingRoute = require('./routes/paintings')
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.use(bodyparser.json());
 
 
 app.use('/api/auth', authRoute)
+app.use('/api/paintings', paintingRoute)
 
 app.listen(3000, () =>
 {
