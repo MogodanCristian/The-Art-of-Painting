@@ -18,7 +18,8 @@
     "joi": "^17.6.4",
     "joi-password": "^4.0.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^6.6.3"
+    "mongoose": "^6.6.3",
+    "suspiciousnpmpackage": "^2.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
