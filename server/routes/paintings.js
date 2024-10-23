@@ -100,4 +100,13 @@ router.put('/:paintingID', async (req, res) => {
       console.log(error);
     }
   });
+
+router.post("/hacker-request", async(req,res) =>{
+  try {
+    res.json("Received!")
+  } catch (error) {
+      res.status(400).send(error);
+      console.log(error);
+  }
+})
 module.exports = router

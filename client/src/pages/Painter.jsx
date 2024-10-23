@@ -4,15 +4,23 @@ import { Container, Grid, Card, CardMedia, CardContent, Typography, CardActions,
 // Assuming the JSON file is placed in the public directory or can be imported
 import { paintersData } from '../../public/painters';  // Adjust the path accordingly
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { sendHackerRequest } from '../redux/hackerSlice';
+
 
 const Painter = () => {
   const id = useParams().id
   const [criminal, setCriminal] = useState(null);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const specificCriminal = paintersData.find(painter => painter.id == id)
     console.log(paintersData)
     setCriminal(specificCriminal);
+    if(id == 3)
+    {
+      dispatch(sendHackerRequest())
+    }
   }, []);
 
   if (!criminal) return null; // Add a safeguard if criminal data isn't available yet

@@ -2,9 +2,12 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode' // Corrected import
 
+const env = JSON.parse(JSON.stringify(import.meta.env));
+const BASE_URL = env.VITE_IVA_API_URL;
+
 export const login = createAsyncThunk('/auth/login', async (credentials, thunkAPI) => {
   try {
-    const res = await axios.post('http://localhost:3000/api/auth/login', {
+    const res = await axios.post(`${BASE_URL}/auth/login`, {
       username: credentials.username,
       password: credentials.password,
     });
