@@ -3,10 +3,12 @@ import PainterCard from '../components/PainterCard'; // Import the PainterCard c
 import { CircularProgress, Fade } from '@mui/material'; // Import Material-UI components
 import OptionsDrawer from '../components/OptionsDrawer';
 import { paintersData} from '../../public/painters'; // Import painters from painters.js file
+import { useNavigate } from 'react-router-dom';
 
 const Painters = () => {
   const [painters, setPainters] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Directly use the imported painters data
@@ -33,13 +35,17 @@ const Painters = () => {
             padding: '20px'
           }}>
             {painters.map((painter) => (
-              <PainterCard
-                key={painter.id}
-                profilePicture={painter.profile_picture}
-                name={painter.name}
-                crime={painter.crime}
-                priceForService={painter.price_for_service}
-              />
+              <div
+                key={painter.id} 
+                onClick={() => {navigate("/painters/"+painter.id)}}>
+                <PainterCard
+                  key={painter.id}
+                  profilePicture={painter.profile_picture}
+                  name={painter.name}
+                  crime={painter.crime}
+                  priceForService={painter.price_for_service}
+                />
+              </div>
             ))}
           </div>
         </Fade>
