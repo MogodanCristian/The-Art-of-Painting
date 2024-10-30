@@ -3,7 +3,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode' // Corrected import
 
 const env = JSON.parse(JSON.stringify(import.meta.env));
-const BASE_URL = env.VITE_IVA_API_URL;
+const BASE_URL = env.VITE_ART_API_URL;
 
 export const login = createAsyncThunk('/auth/login', async (credentials, thunkAPI) => {
   try {
