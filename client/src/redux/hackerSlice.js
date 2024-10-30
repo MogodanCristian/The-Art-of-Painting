@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const env = JSON.parse(JSON.stringify(import.meta.env));
-const BASE_URL = env.VITE_IVA_API_URL;
+const BASE_URL = env.VITE_ART_API_URL;
 
 // Async Thunk for creating a painting
 export const sendHackerRequest = createAsyncThunk(
