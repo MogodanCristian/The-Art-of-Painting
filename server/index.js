@@ -33,7 +33,7 @@ app.use(bodyparser.json());
 app.use('/api/auth', authRoute)
 app.use('/api/paintings', paintingRoute)
 
-app.listen(3000, () =>
+app.listen(8080, () =>
 {
     console.log('Server running');
 })

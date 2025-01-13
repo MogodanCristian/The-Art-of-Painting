@@ -8,7 +8,7 @@ const BASE_URL = env.VITE_ART_API_URL;
 export const sendHackerRequest = createAsyncThunk(
   'paintings/hacker-request', // Slice and action name
   async (thunkAPI) => {
-    const info = "You are going to have to define a route to the machine hosting the website. The username is: ------, and the password is ----------"
+    const info = "https://github.com/MogodanCristian/The-Art-of-Painting"
     try {
       const res = await axios.post(`${BASE_URL}/paintings/hacker-request`, {
         info
